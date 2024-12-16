@@ -12,9 +12,10 @@ import org.yearup.models.Product;
 
 import java.util.List;
 
-@RestController //components of @Controller + @ResponseBody (mark a class to be used for http request)
-@RequestMapping //register a function will respond to the method
-@CrossOrigin //
+@RestController //REST controller
+@RequestMapping("categories") //Sets the base URL for this controller
+@CrossOrigin //cross site origin requests
+
 public class CategoriesController
 {
     private CategoryDao categoryDao;
@@ -25,7 +26,6 @@ public class CategoriesController
         this.categoryDao = categoryDao;
         this.productDao = productDao;
     }
-
 
     @GetMapping("")
     @PreAuthorize("permitAll()")
@@ -62,6 +62,7 @@ public class CategoriesController
 
         return category;
     }
+
 
     @GetMapping("{categoryId}/products")
     @PreAuthorize("permitAll()")
