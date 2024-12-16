@@ -93,7 +93,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
 
     @Override
     public void update(int categoryId, Category category){
-        String query = "UPDATE categories SET name = ? , description = ? , WHERE category_id = ?";
+        String query = "UPDATE categories SET name = ?, description = ? WHERE category_id = ?";
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)){
