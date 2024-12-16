@@ -41,12 +41,29 @@ public class CategoriesController
         }
     }
 
-    // add the appropriate annotation for a get action
-    public Category getById(@PathVariable int id)
+    @GetMapping("{id}")
+    @PreAuthorize("permitAll()")
+    public Category getById(@PathVariable int id )
     {
-        // get the category by id
-        return null;
+        Category category = null;
+        try
+        {
+            category = categoryDao.getById(id);
+        }
+        catch(Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+        }
+
+        if(category == null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return category;
     }
+
+
 
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
