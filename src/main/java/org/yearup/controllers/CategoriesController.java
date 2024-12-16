@@ -63,15 +63,18 @@ public class CategoriesController
         return category;
     }
 
-
-
-    // the url to return all products in category 1 would look like this
-    // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
+    @PreAuthorize("permitAll()")
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
-        // get a list of product by categoryId
-        return null;
+        try
+        {
+            return productDao.listByCategoryId(categoryId);
+        }
+        catch (Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+        }
     }
 
     // add annotation to call this method for a POST action
