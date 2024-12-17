@@ -10,29 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
-    public MySqlCategoryDao(DataSource dataSource) {
+public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
+{
+    public MySqlCategoryDao(DataSource dataSource)
+    {
         super(dataSource);
     }
 
     @Override
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategories()
+    {
         List<Category> categories = new ArrayList<>();
-        String query = "SELECT category_id, name, description FROM categories";
+        String sql = "SELECT category_id, name, description FROM categories";
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 int categoryId = resultSet.getInt("category_id");
                 String categoryName = resultSet.getString("name");
                 String description = resultSet.getString("description");
+
                 Category category = new Category(categoryId, categoryName, description);
                 categories.add(category);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving categories", e);
+            throw new RuntimeException("Error retrieved the categories", e);
         }
 
         return categories;
@@ -61,8 +65,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         return null;
     }
 
-
-
     @Override
     public Category create(Category category)
     {
@@ -90,38 +92,37 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         return null;
     }
 
-
     @Override
-    public void update(int categoryId, Category category){
-        String query = "UPDATE categories SET name = ?, description = ? WHERE category_id = ?";
+    public void update(int categoryId, Category category)
+    {
+        String sql = "UPDATE categories SET name = ?, description = ? WHERE category_id = ?";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query)){
-            preparedStatement.setString(1,category.getName());
-            preparedStatement.setString(2,category.getDescription());
-            preparedStatement.setInt(3,categoryId);
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            int affectedRows = preparedStatement.executeUpdate();
-            if(affectedRows==0){throw new SQLException("Delete failed, no rows affected!");}
-        }catch (SQLException e){
-            e.printStackTrace();
+            statement.setString(1, category.getName());
+            statement.setString(2, category.getDescription());
+            statement.setInt(3, categoryId);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating category", e);
         }
     }
 
     @Override
     public void delete(int categoryId)
     {
-        String query = "DELETE FROM categories WHERE category_id = ?" ;
+        String sql = "DELETE FROM categories WHERE category_id = ?";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query)){
-            preparedStatement.setInt(1,categoryId);
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            int affectedRows = preparedStatement.executeUpdate();
-            if(affectedRows==0){throw new SQLException("Delete failed, no rows affected!");}
+            statement.setInt(1, categoryId);
 
-        }catch (SQLException e){
-            e.printStackTrace();
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleted the category", e);
         }
     }
 
