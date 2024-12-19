@@ -10,16 +10,16 @@ maintaining seamless backend performance throughout.
 
 ## User Stories
 
-As a system administrator, I need to obtain a list of all categories, so I can oversee and handle all the categories present in the system.
-As a system administrator, I require the ability to fetch a specific category using its ID, so I can examine its particulars.
-As a system administrator, I need to be able to establish a new category, so I can increase the range of available categories.
-As a system administrator, I require the capability to modify an existing category, so I can rectify or alter its information.
-As a system administrator, I need the function to remove a category, so I can eliminate it if it's no longer needed.
-As a customer, I wish to search for merchandise by category, price bracket, and color, so I can locate items that suit my requirements.
-As a customer, I desire to see the specifics of a particular product, so I can gain more knowledge about its attributes.
-As a system administrator, I require the ability to introduce a new product, so I can broaden the product offerings.
-As a system administrator, I need the function to revise an existing product, so I can amend its data or adjust its stock levels.
-As a system administrator, I require the capability to eliminate a product, so I can discard obsolete or out-of-stock items.
+- As a system administrator, I need to obtain a list of all categories, so I can oversee and handle all the categories present in the system.
+- As a system administrator, I require the ability to fetch a specific category using its ID, so I can examine its particulars.
+- As a system administrator, I need to be able to establish a new category, so I can increase the range of available categories.
+- As a system administrator, I require the capability to modify an existing category, so I can rectify or alter its information.
+- As a system administrator, I need the function to remove a category, so I can eliminate it if it's no longer needed.
+- As a customer, I wish to search for merchandise by category, price bracket, and color, so I can locate items that suit my requirements.
+- As a customer, I desire to see the specifics of a particular product, so I can gain more knowledge about its attributes.
+- As a system administrator, I require the ability to introduce a new product, so I can broaden the product offerings.
+- As a system administrator, I need the function to revise an existing product, so I can amend its data or adjust its stock levels.
+- As a system administrator, I require the capability to eliminate a product, so I can discard obsolete or out-of-stock items.
 
 
 
